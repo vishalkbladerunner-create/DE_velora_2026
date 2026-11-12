@@ -1,0 +1,27 @@
+{
+  "team_number": "T0020",
+  "group_lead": {
+    "name": "Vishal Kumar",
+    "enrollment_no": "2501010512",
+    "github": "vishalkbladerunner-create"
+  },
+  "members": [
+    {
+      "name": "Manav Garg",
+      "enrollment_no": "2501010256",
+      "github": "manav363"
+    },
+    {
+      "name": "Yash Gupta",
+      "enrollment_no": "2501010519",
+      "github": "yashhgupta-007"
+    },
+    {
+      "name": "Sanyam Garg",
+      "enrollment_no": "2501010406",
+      "github": ""
+    }
+  ],
+  "postgres_version": "15.15",
+  "laptop_used_for_benchmarks": "Vishal Kumar's MacBook (Apple Silicon)"
+}
