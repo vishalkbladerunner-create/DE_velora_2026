@@ -1,0 +1,45 @@
+=== R09 run 1 ===
+WindowAgg  (cost=2820.86..2820.95 rows=3 width=57) (actual time=4.800..4.803 rows=8 loops=1)
+  Buffers: shared hit=1050
+  ->  Sort  (cost=2820.86..2820.87 rows=3 width=25) (actual time=4.790..4.790 rows=8 loops=1)
+        Sort Key: created_at, txn_id
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=1050
+        ->  Seq Scan on wallet_transactions  (cost=0.00..2820.84 rows=3 width=25) (actual time=0.326..4.783 rows=8 loops=1)
+              Filter: ((user_id = 1006) AND ((status)::text = 'SUCCESS'::text))
+              Rows Removed by Filter: 118335
+              Buffers: shared hit=1044
+Planning:
+  Buffers: shared hit=98
+Planning Time: 0.279 ms
+Execution Time: 4.821 ms
+=== R09 run 2 ===
+WindowAgg  (cost=2820.86..2820.95 rows=3 width=57) (actual time=4.227..4.231 rows=8 loops=1)
+  Buffers: shared hit=1050
+  ->  Sort  (cost=2820.86..2820.87 rows=3 width=25) (actual time=4.216..4.216 rows=8 loops=1)
+        Sort Key: created_at, txn_id
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=1050
+        ->  Seq Scan on wallet_transactions  (cost=0.00..2820.84 rows=3 width=25) (actual time=0.259..4.210 rows=8 loops=1)
+              Filter: ((user_id = 1006) AND ((status)::text = 'SUCCESS'::text))
+              Rows Removed by Filter: 118335
+              Buffers: shared hit=1044
+Planning:
+  Buffers: shared hit=98
+Planning Time: 0.203 ms
+Execution Time: 4.248 ms
+=== R09 run 3 ===
+WindowAgg  (cost=2820.86..2820.95 rows=3 width=57) (actual time=4.006..4.010 rows=8 loops=1)
+  Buffers: shared hit=1050
+  ->  Sort  (cost=2820.86..2820.87 rows=3 width=25) (actual time=3.998..3.998 rows=8 loops=1)
+        Sort Key: created_at, txn_id
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=1050
+        ->  Seq Scan on wallet_transactions  (cost=0.00..2820.84 rows=3 width=25) (actual time=0.265..3.992 rows=8 loops=1)
+              Filter: ((user_id = 1006) AND ((status)::text = 'SUCCESS'::text))
+              Rows Removed by Filter: 118335
+              Buffers: shared hit=1044
+Planning:
+  Buffers: shared hit=98
+Planning Time: 0.233 ms
+Execution Time: 4.028 ms

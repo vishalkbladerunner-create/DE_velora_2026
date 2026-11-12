@@ -1,0 +1,78 @@
+=== R20 run 1 ===
+WindowAgg  (cost=3790.94..3818.53 rows=223 width=68) (actual time=6.235..7.043 rows=28 loops=1)
+  Buffers: shared hit=1081
+  ->  Finalize GroupAggregate  (cost=3790.94..3812.96 rows=223 width=36) (actual time=6.229..7.031 rows=28 loops=1)
+        Group Key: ((wallet_transactions.created_at)::date)
+        Buffers: shared hit=1081
+        ->  Gather Merge  (cost=3790.94..3808.63 rows=131 width=36) (actual time=6.226..7.014 rows=54 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=1081
+              ->  Partial GroupAggregate  (cost=2790.93..2793.88 rows=131 width=36) (actual time=3.912..3.978 rows=27 loops=2)
+                    Group Key: ((wallet_transactions.created_at)::date)
+                    Buffers: shared hit=1081
+                    ->  Sort  (cost=2790.93..2791.26 rows=131 width=9) (actual time=3.900..3.917 rows=1042 loops=2)
+                          Sort Key: ((wallet_transactions.created_at)::date)
+                          Sort Method: quicksort  Memory: 80kB
+                          Buffers: shared hit=1081
+                          Worker 0:  Sort Method: quicksort  Memory: 107kB
+                          ->  Parallel Seq Scan on wallet_transactions  (cost=0.00..2786.33 rows=131 width=9) (actual time=3.562..3.851 rows=1042 loops=2)
+                                Filter: (((txn_type)::text = 'DEPOSIT'::text) AND ((status)::text = 'SUCCESS'::text) AND ((created_at)::date >= '2026-06-01'::date) AND ((created_at)::date <= '2026-06-30'::date))
+                                Rows Removed by Filter: 58129
+                                Buffers: shared hit=1044
+Planning:
+  Buffers: shared hit=106
+Planning Time: 0.273 ms
+Execution Time: 7.077 ms
+=== R20 run 2 ===
+WindowAgg  (cost=3790.94..3818.53 rows=223 width=68) (actual time=4.920..5.745 rows=28 loops=1)
+  Buffers: shared hit=1081
+  ->  Finalize GroupAggregate  (cost=3790.94..3812.96 rows=223 width=36) (actual time=4.915..5.732 rows=28 loops=1)
+        Group Key: ((wallet_transactions.created_at)::date)
+        Buffers: shared hit=1081
+        ->  Gather Merge  (cost=3790.94..3808.63 rows=131 width=36) (actual time=4.906..5.715 rows=54 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=1081
+              ->  Partial GroupAggregate  (cost=2790.93..2793.88 rows=131 width=36) (actual time=3.769..3.837 rows=27 loops=2)
+                    Group Key: ((wallet_transactions.created_at)::date)
+                    Buffers: shared hit=1081
+                    ->  Sort  (cost=2790.93..2791.26 rows=131 width=9) (actual time=3.758..3.776 rows=1042 loops=2)
+                          Sort Key: ((wallet_transactions.created_at)::date)
+                          Sort Method: quicksort  Memory: 108kB
+                          Buffers: shared hit=1081
+                          Worker 0:  Sort Method: quicksort  Memory: 79kB
+                          ->  Parallel Seq Scan on wallet_transactions  (cost=0.00..2786.33 rows=131 width=9) (actual time=3.405..3.708 rows=1042 loops=2)
+                                Filter: (((txn_type)::text = 'DEPOSIT'::text) AND ((status)::text = 'SUCCESS'::text) AND ((created_at)::date >= '2026-06-01'::date) AND ((created_at)::date <= '2026-06-30'::date))
+                                Rows Removed by Filter: 58129
+                                Buffers: shared hit=1044
+Planning:
+  Buffers: shared hit=106
+Planning Time: 0.254 ms
+Execution Time: 5.775 ms
+=== R20 run 3 ===
+WindowAgg  (cost=3790.94..3818.53 rows=223 width=68) (actual time=5.506..6.353 rows=28 loops=1)
+  Buffers: shared hit=1081
+  ->  Finalize GroupAggregate  (cost=3790.94..3812.96 rows=223 width=36) (actual time=5.499..6.339 rows=28 loops=1)
+        Group Key: ((wallet_transactions.created_at)::date)
+        Buffers: shared hit=1081
+        ->  Gather Merge  (cost=3790.94..3808.63 rows=131 width=36) (actual time=5.489..6.317 rows=53 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=1081
+              ->  Partial GroupAggregate  (cost=2790.93..2793.88 rows=131 width=36) (actual time=4.041..4.106 rows=26 loops=2)
+                    Group Key: ((wallet_transactions.created_at)::date)
+                    Buffers: shared hit=1081
+                    ->  Sort  (cost=2790.93..2791.26 rows=131 width=9) (actual time=4.029..4.046 rows=1042 loops=2)
+                          Sort Key: ((wallet_transactions.created_at)::date)
+                          Sort Method: quicksort  Memory: 80kB
+                          Buffers: shared hit=1081
+                          Worker 0:  Sort Method: quicksort  Memory: 107kB
+                          ->  Parallel Seq Scan on wallet_transactions  (cost=0.00..2786.33 rows=131 width=9) (actual time=3.695..3.977 rows=1042 loops=2)
+                                Filter: (((txn_type)::text = 'DEPOSIT'::text) AND ((status)::text = 'SUCCESS'::text) AND ((created_at)::date >= '2026-06-01'::date) AND ((created_at)::date <= '2026-06-30'::date))
+                                Rows Removed by Filter: 58129
+                                Buffers: shared hit=1044
+Planning:
+  Buffers: shared hit=106
+Planning Time: 0.330 ms
+Execution Time: 6.399 ms
