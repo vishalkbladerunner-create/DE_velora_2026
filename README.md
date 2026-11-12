@@ -25,7 +25,7 @@
 | Group Lead | Vishal Kumar | 2501010512 | vishalkbladerunner-create |
 | Member 2 | Manav Garg | 2501010256 | manav363 |
 | Member 3 | Yash Gupta | 2501010519 | yashhgupta-007 |
-| Member 4 | Sanyam Garg | 2501010406 | _to be added_ |
+| Member 4 | Sanyam Garg | 2501010406 | sanyamgarg023-dev |
 
 **Team No.:** T0020 · **Section:** B · **Repository URL:** https://github.com/vishalkbladerunner-create/DE_velora_2026
 
