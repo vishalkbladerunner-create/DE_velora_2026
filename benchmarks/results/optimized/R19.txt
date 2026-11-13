@@ -1,144 +1,144 @@
 === R19 run 1 ===
-Sort  (cost=6932.07..6932.69 rows=250 width=24) (actual time=18.613..19.086 rows=250 loops=1)
+Sort  (cost=6932.07..6932.69 rows=250 width=24) (actual time=18.794..19.486 rows=250 loops=1)
   Sort Key: (COALESCE(pk.picks, '0'::bigint)) DESC
-  Sort Method: quicksort  Memory: 44kB
+  Sort Method: quicksort  Memory: 41kB
   Buffers: shared hit=1962
-  ->  Hash Left Join  (cost=6911.49..6922.11 rows=250 width=24) (actual time=18.535..19.055 rows=250 loops=1)
+  ->  Hash Left Join  (cost=6911.49..6922.11 rows=250 width=24) (actual time=18.724..19.457 rows=250 loops=1)
         Hash Cond: (p.player_id = pk.player_id)
         Buffers: shared hit=1959
-        ->  Hash Join  (cost=1.35..11.31 rows=250 width=16) (actual time=0.008..0.042 rows=250 loops=1)
+        ->  Hash Join  (cost=1.35..11.31 rows=250 width=16) (actual time=0.009..0.039 rows=250 loops=1)
               Hash Cond: (p.team_id = t.team_id)
               Buffers: shared hit=5
-              ->  Seq Scan on players p  (cost=0.00..8.50 rows=450 width=20) (actual time=0.002..0.012 rows=450 loops=1)
+              ->  Seq Scan on players p  (cost=0.00..8.50 rows=450 width=20) (actual time=0.002..0.011 rows=450 loops=1)
                     Buffers: shared hit=4
-              ->  Hash  (cost=1.23..1.23 rows=10 width=4) (actual time=0.004..0.004 rows=10 loops=1)
+              ->  Hash  (cost=1.23..1.23 rows=10 width=4) (actual time=0.005..0.005 rows=10 loops=1)
                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
                     Buffers: shared hit=1
-                    ->  Seq Scan on teams t  (cost=0.00..1.23 rows=10 width=4) (actual time=0.001..0.002 rows=10 loops=1)
+                    ->  Seq Scan on teams t  (cost=0.00..1.23 rows=10 width=4) (actual time=0.002..0.003 rows=10 loops=1)
                           Filter: ((team_type)::text = 'FRANCHISE'::text)
                           Rows Removed by Filter: 8
                           Buffers: shared hit=1
-        ->  Hash  (cost=6905.19..6905.19 rows=396 width=12) (actual time=18.524..18.992 rows=396 loops=1)
+        ->  Hash  (cost=6905.19..6905.19 rows=396 width=12) (actual time=18.712..19.400 rows=396 loops=1)
               Buckets: 1024  Batches: 1  Memory Usage: 26kB
               Buffers: shared hit=1954
-              ->  Subquery Scan on pk  (cost=6849.75..6905.19 rows=396 width=12) (actual time=18.402..18.974 rows=396 loops=1)
+              ->  Subquery Scan on pk  (cost=6849.75..6905.19 rows=396 width=12) (actual time=18.593..19.378 rows=396 loops=1)
                     Buffers: shared hit=1954
-                    ->  Finalize GroupAggregate  (cost=6849.75..6901.23 rows=396 width=12) (actual time=18.402..18.960 rows=396 loops=1)
+                    ->  Finalize GroupAggregate  (cost=6849.75..6901.23 rows=396 width=12) (actual time=18.592..19.361 rows=396 loops=1)
                           Group Key: user_team_players.player_id
                           Buffers: shared hit=1954
-                          ->  Gather Merge  (cost=6849.75..6895.29 rows=396 width=12) (actual time=18.400..18.918 rows=792 loops=1)
+                          ->  Gather Merge  (cost=6849.75..6895.29 rows=396 width=12) (actual time=18.590..19.316 rows=792 loops=1)
                                 Workers Planned: 1
                                 Workers Launched: 1
                                 Buffers: shared hit=1954
-                                ->  Sort  (cost=5849.74..5850.73 rows=396 width=12) (actual time=17.676..17.682 rows=396 loops=2)
+                                ->  Sort  (cost=5849.74..5850.73 rows=396 width=12) (actual time=17.490..17.495 rows=396 loops=2)
                                       Sort Key: user_team_players.player_id
-                                      Sort Method: quicksort  Memory: 43kB
+                                      Sort Method: quicksort  Memory: 46kB
                                       Buffers: shared hit=1954
-                                      Worker 0:  Sort Method: quicksort  Memory: 43kB
-                                      ->  Partial HashAggregate  (cost=5828.69..5832.65 rows=396 width=12) (actual time=17.626..17.640 rows=396 loops=2)
+                                      Worker 0:  Sort Method: quicksort  Memory: 46kB
+                                      ->  Partial HashAggregate  (cost=5828.69..5832.65 rows=396 width=12) (actual time=17.440..17.454 rows=396 loops=2)
                                             Group Key: user_team_players.player_id
                                             Batches: 1  Memory Usage: 61kB
                                             Buffers: shared hit=1947
                                             Worker 0:  Batches: 1  Memory Usage: 61kB
-                                            ->  Parallel Seq Scan on user_team_players  (cost=0.00..4534.79 rows=258779 width=4) (actual time=0.003..5.096 rows=219962 loops=2)
+                                            ->  Parallel Seq Scan on user_team_players  (cost=0.00..4534.79 rows=258779 width=4) (actual time=0.002..4.711 rows=219962 loops=2)
                                                   Buffers: shared hit=1947
 Planning:
   Buffers: shared hit=182
-Planning Time: 0.294 ms
-Execution Time: 19.125 ms
+Planning Time: 0.674 ms
+Execution Time: 19.526 ms
 === R19 run 2 ===
-Sort  (cost=6932.07..6932.69 rows=250 width=24) (actual time=18.873..19.273 rows=250 loops=1)
+Sort  (cost=6932.07..6932.69 rows=250 width=24) (actual time=18.742..19.479 rows=250 loops=1)
   Sort Key: (COALESCE(pk.picks, '0'::bigint)) DESC
-  Sort Method: quicksort  Memory: 44kB
+  Sort Method: quicksort  Memory: 41kB
   Buffers: shared hit=1962
-  ->  Hash Left Join  (cost=6911.49..6922.11 rows=250 width=24) (actual time=18.800..19.243 rows=250 loops=1)
+  ->  Hash Left Join  (cost=6911.49..6922.11 rows=250 width=24) (actual time=18.671..19.450 rows=250 loops=1)
         Hash Cond: (p.player_id = pk.player_id)
         Buffers: shared hit=1959
-        ->  Hash Join  (cost=1.35..11.31 rows=250 width=16) (actual time=0.009..0.040 rows=250 loops=1)
+        ->  Hash Join  (cost=1.35..11.31 rows=250 width=16) (actual time=0.009..0.041 rows=250 loops=1)
               Hash Cond: (p.team_id = t.team_id)
               Buffers: shared hit=5
               ->  Seq Scan on players p  (cost=0.00..8.50 rows=450 width=20) (actual time=0.002..0.012 rows=450 loops=1)
                     Buffers: shared hit=4
-              ->  Hash  (cost=1.23..1.23 rows=10 width=4) (actual time=0.004..0.004 rows=10 loops=1)
+              ->  Hash  (cost=1.23..1.23 rows=10 width=4) (actual time=0.005..0.005 rows=10 loops=1)
                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
                     Buffers: shared hit=1
-                    ->  Seq Scan on teams t  (cost=0.00..1.23 rows=10 width=4) (actual time=0.001..0.002 rows=10 loops=1)
+                    ->  Seq Scan on teams t  (cost=0.00..1.23 rows=10 width=4) (actual time=0.002..0.003 rows=10 loops=1)
                           Filter: ((team_type)::text = 'FRANCHISE'::text)
                           Rows Removed by Filter: 8
                           Buffers: shared hit=1
-        ->  Hash  (cost=6905.19..6905.19 rows=396 width=12) (actual time=18.788..19.184 rows=396 loops=1)
+        ->  Hash  (cost=6905.19..6905.19 rows=396 width=12) (actual time=18.659..19.391 rows=396 loops=1)
               Buckets: 1024  Batches: 1  Memory Usage: 26kB
               Buffers: shared hit=1954
-              ->  Subquery Scan on pk  (cost=6849.75..6905.19 rows=396 width=12) (actual time=18.656..19.159 rows=396 loops=1)
+              ->  Subquery Scan on pk  (cost=6849.75..6905.19 rows=396 width=12) (actual time=18.545..19.371 rows=396 loops=1)
                     Buffers: shared hit=1954
-                    ->  Finalize GroupAggregate  (cost=6849.75..6901.23 rows=396 width=12) (actual time=18.655..19.144 rows=396 loops=1)
+                    ->  Finalize GroupAggregate  (cost=6849.75..6901.23 rows=396 width=12) (actual time=18.545..19.358 rows=396 loops=1)
                           Group Key: user_team_players.player_id
                           Buffers: shared hit=1954
-                          ->  Gather Merge  (cost=6849.75..6895.29 rows=396 width=12) (actual time=18.653..19.098 rows=792 loops=1)
+                          ->  Gather Merge  (cost=6849.75..6895.29 rows=396 width=12) (actual time=18.541..19.315 rows=792 loops=1)
                                 Workers Planned: 1
                                 Workers Launched: 1
                                 Buffers: shared hit=1954
-                                ->  Sort  (cost=5849.74..5850.73 rows=396 width=12) (actual time=17.970..17.977 rows=396 loops=2)
+                                ->  Sort  (cost=5849.74..5850.73 rows=396 width=12) (actual time=17.384..17.390 rows=396 loops=2)
                                       Sort Key: user_team_players.player_id
-                                      Sort Method: quicksort  Memory: 43kB
+                                      Sort Method: quicksort  Memory: 46kB
                                       Buffers: shared hit=1954
-                                      Worker 0:  Sort Method: quicksort  Memory: 43kB
-                                      ->  Partial HashAggregate  (cost=5828.69..5832.65 rows=396 width=12) (actual time=17.919..17.934 rows=396 loops=2)
+                                      Worker 0:  Sort Method: quicksort  Memory: 46kB
+                                      ->  Partial HashAggregate  (cost=5828.69..5832.65 rows=396 width=12) (actual time=17.336..17.350 rows=396 loops=2)
                                             Group Key: user_team_players.player_id
                                             Batches: 1  Memory Usage: 61kB
                                             Buffers: shared hit=1947
                                             Worker 0:  Batches: 1  Memory Usage: 61kB
-                                            ->  Parallel Seq Scan on user_team_players  (cost=0.00..4534.79 rows=258779 width=4) (actual time=0.003..5.199 rows=219962 loops=2)
+                                            ->  Parallel Seq Scan on user_team_players  (cost=0.00..4534.79 rows=258779 width=4) (actual time=0.002..4.700 rows=219962 loops=2)
                                                   Buffers: shared hit=1947
 Planning:
   Buffers: shared hit=182
-Planning Time: 0.310 ms
-Execution Time: 19.314 ms
+Planning Time: 0.650 ms
+Execution Time: 19.514 ms
 === R19 run 3 ===
-Sort  (cost=6932.07..6932.69 rows=250 width=24) (actual time=18.086..18.475 rows=250 loops=1)
+Sort  (cost=6932.07..6932.69 rows=250 width=24) (actual time=18.655..19.333 rows=250 loops=1)
   Sort Key: (COALESCE(pk.picks, '0'::bigint)) DESC
-  Sort Method: quicksort  Memory: 44kB
+  Sort Method: quicksort  Memory: 41kB
   Buffers: shared hit=1962
-  ->  Hash Left Join  (cost=6911.49..6922.11 rows=250 width=24) (actual time=18.014..18.447 rows=250 loops=1)
+  ->  Hash Left Join  (cost=6911.49..6922.11 rows=250 width=24) (actual time=18.586..19.306 rows=250 loops=1)
         Hash Cond: (p.player_id = pk.player_id)
         Buffers: shared hit=1959
-        ->  Hash Join  (cost=1.35..11.31 rows=250 width=16) (actual time=0.008..0.041 rows=250 loops=1)
+        ->  Hash Join  (cost=1.35..11.31 rows=250 width=16) (actual time=0.010..0.041 rows=250 loops=1)
               Hash Cond: (p.team_id = t.team_id)
               Buffers: shared hit=5
-              ->  Seq Scan on players p  (cost=0.00..8.50 rows=450 width=20) (actual time=0.002..0.012 rows=450 loops=1)
+              ->  Seq Scan on players p  (cost=0.00..8.50 rows=450 width=20) (actual time=0.002..0.013 rows=450 loops=1)
                     Buffers: shared hit=4
-              ->  Hash  (cost=1.23..1.23 rows=10 width=4) (actual time=0.004..0.004 rows=10 loops=1)
+              ->  Hash  (cost=1.23..1.23 rows=10 width=4) (actual time=0.005..0.005 rows=10 loops=1)
                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
                     Buffers: shared hit=1
-                    ->  Seq Scan on teams t  (cost=0.00..1.23 rows=10 width=4) (actual time=0.001..0.002 rows=10 loops=1)
+                    ->  Seq Scan on teams t  (cost=0.00..1.23 rows=10 width=4) (actual time=0.002..0.003 rows=10 loops=1)
                           Filter: ((team_type)::text = 'FRANCHISE'::text)
                           Rows Removed by Filter: 8
                           Buffers: shared hit=1
-        ->  Hash  (cost=6905.19..6905.19 rows=396 width=12) (actual time=18.003..18.388 rows=396 loops=1)
+        ->  Hash  (cost=6905.19..6905.19 rows=396 width=12) (actual time=18.572..19.246 rows=396 loops=1)
               Buckets: 1024  Batches: 1  Memory Usage: 26kB
               Buffers: shared hit=1954
-              ->  Subquery Scan on pk  (cost=6849.75..6905.19 rows=396 width=12) (actual time=17.849..18.339 rows=396 loops=1)
+              ->  Subquery Scan on pk  (cost=6849.75..6905.19 rows=396 width=12) (actual time=18.459..19.226 rows=396 loops=1)
                     Buffers: shared hit=1954
-                    ->  Finalize GroupAggregate  (cost=6849.75..6901.23 rows=396 width=12) (actual time=17.849..18.325 rows=396 loops=1)
+                    ->  Finalize GroupAggregate  (cost=6849.75..6901.23 rows=396 width=12) (actual time=18.459..19.212 rows=396 loops=1)
                           Group Key: user_team_players.player_id
                           Buffers: shared hit=1954
-                          ->  Gather Merge  (cost=6849.75..6895.29 rows=396 width=12) (actual time=17.846..18.273 rows=792 loops=1)
+                          ->  Gather Merge  (cost=6849.75..6895.29 rows=396 width=12) (actual time=18.457..19.172 rows=792 loops=1)
                                 Workers Planned: 1
                                 Workers Launched: 1
                                 Buffers: shared hit=1954
-                                ->  Sort  (cost=5849.74..5850.73 rows=396 width=12) (actual time=17.184..17.190 rows=396 loops=2)
+                                ->  Sort  (cost=5849.74..5850.73 rows=396 width=12) (actual time=17.285..17.291 rows=396 loops=2)
                                       Sort Key: user_team_players.player_id
-                                      Sort Method: quicksort  Memory: 43kB
+                                      Sort Method: quicksort  Memory: 46kB
                                       Buffers: shared hit=1954
-                                      Worker 0:  Sort Method: quicksort  Memory: 43kB
-                                      ->  Partial HashAggregate  (cost=5828.69..5832.65 rows=396 width=12) (actual time=17.136..17.150 rows=396 loops=2)
+                                      Worker 0:  Sort Method: quicksort  Memory: 46kB
+                                      ->  Partial HashAggregate  (cost=5828.69..5832.65 rows=396 width=12) (actual time=17.235..17.250 rows=396 loops=2)
                                             Group Key: user_team_players.player_id
                                             Batches: 1  Memory Usage: 61kB
                                             Buffers: shared hit=1947
                                             Worker 0:  Batches: 1  Memory Usage: 61kB
-                                            ->  Parallel Seq Scan on user_team_players  (cost=0.00..4534.79 rows=258779 width=4) (actual time=0.002..4.949 rows=219962 loops=2)
+                                            ->  Parallel Seq Scan on user_team_players  (cost=0.00..4534.79 rows=258779 width=4) (actual time=0.002..4.651 rows=219962 loops=2)
                                                   Buffers: shared hit=1947
 Planning:
   Buffers: shared hit=182
-Planning Time: 0.288 ms
-Execution Time: 18.515 ms
+Planning Time: 0.670 ms
+Execution Time: 19.371 ms
