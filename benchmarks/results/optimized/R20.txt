@@ -1,69 +1,69 @@
 === R20 run 1 ===
-WindowAgg  (cost=1458.08..1564.18 rows=2232 width=68) (actual time=0.637..0.759 rows=28 loops=1)
-  Buffers: shared hit=87
-  ->  GroupAggregate  (cost=1458.08..1508.38 rows=2232 width=36) (actual time=0.630..0.747 rows=28 loops=1)
+WindowAgg  (cost=1463.28..1571.34 rows=2273 width=68) (actual time=0.615..0.731 rows=28 loops=1)
+  Buffers: shared hit=59 read=25
+  ->  GroupAggregate  (cost=1463.28..1514.51 rows=2273 width=36) (actual time=0.608..0.720 rows=28 loops=1)
         Group Key: ((wallet_transactions.created_at)::date)
-        Buffers: shared hit=87
-        ->  Sort  (cost=1458.08..1463.69 rows=2243 width=9) (actual time=0.619..0.650 rows=2085 loops=1)
+        Buffers: shared hit=59 read=25
+        ->  Sort  (cost=1463.28..1468.99 rows=2285 width=9) (actual time=0.598..0.628 rows=2085 loops=1)
               Sort Key: ((wallet_transactions.created_at)::date)
-              Sort Method: quicksort  Memory: 194kB
-              Buffers: shared hit=87
-              ->  Bitmap Heap Scan on wallet_transactions  (cost=157.20..1333.25 rows=2243 width=9) (actual time=0.108..0.534 rows=2085 loops=1)
+              Sort Method: quicksort  Memory: 211kB
+              Buffers: shared hit=59 read=25
+              ->  Bitmap Heap Scan on wallet_transactions  (cost=158.69..1335.80 rows=2285 width=9) (actual time=0.131..0.523 rows=2085 loops=1)
                     Recheck Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
                     Filter: (((txn_type)::text = 'DEPOSIT'::text) AND ((status)::text = 'SUCCESS'::text))
                     Rows Removed by Filter: 4012
-                    Heap Blocks: exact=57
-                    Buffers: shared hit=84
-                    ->  Bitmap Index Scan on wallet_time_idx  (cost=0.00..156.64 rows=6022 width=0) (actual time=0.101..0.101 rows=6214 loops=1)
+                    Heap Blocks: exact=54
+                    Buffers: shared hit=56 read=25
+                    ->  Bitmap Index Scan on wallet_time_idx  (cost=0.00..158.12 rows=6170 width=0) (actual time=0.124..0.124 rows=6097 loops=1)
                           Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
-                          Buffers: shared hit=27
+                          Buffers: shared hit=2 read=25
 Planning:
   Buffers: shared hit=226
-Planning Time: 0.337 ms
-Execution Time: 0.788 ms
+Planning Time: 0.682 ms
+Execution Time: 0.752 ms
 === R20 run 2 ===
-WindowAgg  (cost=1458.08..1564.18 rows=2232 width=68) (actual time=0.660..0.788 rows=28 loops=1)
-  Buffers: shared hit=87
-  ->  GroupAggregate  (cost=1458.08..1508.38 rows=2232 width=36) (actual time=0.652..0.776 rows=28 loops=1)
+WindowAgg  (cost=1463.28..1571.34 rows=2273 width=68) (actual time=0.600..0.723 rows=28 loops=1)
+  Buffers: shared hit=84
+  ->  GroupAggregate  (cost=1463.28..1514.51 rows=2273 width=36) (actual time=0.592..0.711 rows=28 loops=1)
         Group Key: ((wallet_transactions.created_at)::date)
-        Buffers: shared hit=87
-        ->  Sort  (cost=1458.08..1463.69 rows=2243 width=9) (actual time=0.641..0.676 rows=2085 loops=1)
+        Buffers: shared hit=84
+        ->  Sort  (cost=1463.28..1468.99 rows=2285 width=9) (actual time=0.582..0.613 rows=2085 loops=1)
               Sort Key: ((wallet_transactions.created_at)::date)
-              Sort Method: quicksort  Memory: 194kB
-              Buffers: shared hit=87
-              ->  Bitmap Heap Scan on wallet_transactions  (cost=157.20..1333.25 rows=2243 width=9) (actual time=0.111..0.556 rows=2085 loops=1)
+              Sort Method: quicksort  Memory: 211kB
+              Buffers: shared hit=84
+              ->  Bitmap Heap Scan on wallet_transactions  (cost=158.69..1335.80 rows=2285 width=9) (actual time=0.102..0.508 rows=2085 loops=1)
                     Recheck Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
                     Filter: (((txn_type)::text = 'DEPOSIT'::text) AND ((status)::text = 'SUCCESS'::text))
                     Rows Removed by Filter: 4012
-                    Heap Blocks: exact=57
-                    Buffers: shared hit=84
-                    ->  Bitmap Index Scan on wallet_time_idx  (cost=0.00..156.64 rows=6022 width=0) (actual time=0.103..0.104 rows=6214 loops=1)
+                    Heap Blocks: exact=54
+                    Buffers: shared hit=81
+                    ->  Bitmap Index Scan on wallet_time_idx  (cost=0.00..158.12 rows=6170 width=0) (actual time=0.095..0.096 rows=6097 loops=1)
                           Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
                           Buffers: shared hit=27
 Planning:
   Buffers: shared hit=226
-Planning Time: 0.320 ms
-Execution Time: 0.816 ms
+Planning Time: 0.589 ms
+Execution Time: 0.743 ms
 === R20 run 3 ===
-WindowAgg  (cost=1458.08..1564.18 rows=2232 width=68) (actual time=0.677..0.811 rows=28 loops=1)
-  Buffers: shared hit=87
-  ->  GroupAggregate  (cost=1458.08..1508.38 rows=2232 width=36) (actual time=0.669..0.799 rows=28 loops=1)
+WindowAgg  (cost=1463.28..1571.34 rows=2273 width=68) (actual time=0.603..0.735 rows=28 loops=1)
+  Buffers: shared hit=84
+  ->  GroupAggregate  (cost=1463.28..1514.51 rows=2273 width=36) (actual time=0.595..0.723 rows=28 loops=1)
         Group Key: ((wallet_transactions.created_at)::date)
-        Buffers: shared hit=87
-        ->  Sort  (cost=1458.08..1463.69 rows=2243 width=9) (actual time=0.658..0.693 rows=2085 loops=1)
+        Buffers: shared hit=84
+        ->  Sort  (cost=1463.28..1468.99 rows=2285 width=9) (actual time=0.584..0.615 rows=2085 loops=1)
               Sort Key: ((wallet_transactions.created_at)::date)
-              Sort Method: quicksort  Memory: 194kB
-              Buffers: shared hit=87
-              ->  Bitmap Heap Scan on wallet_transactions  (cost=157.20..1333.25 rows=2243 width=9) (actual time=0.113..0.573 rows=2085 loops=1)
+              Sort Method: quicksort  Memory: 211kB
+              Buffers: shared hit=84
+              ->  Bitmap Heap Scan on wallet_transactions  (cost=158.69..1335.80 rows=2285 width=9) (actual time=0.101..0.504 rows=2085 loops=1)
                     Recheck Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
                     Filter: (((txn_type)::text = 'DEPOSIT'::text) AND ((status)::text = 'SUCCESS'::text))
                     Rows Removed by Filter: 4012
-                    Heap Blocks: exact=57
-                    Buffers: shared hit=84
-                    ->  Bitmap Index Scan on wallet_time_idx  (cost=0.00..156.64 rows=6022 width=0) (actual time=0.106..0.106 rows=6214 loops=1)
+                    Heap Blocks: exact=54
+                    Buffers: shared hit=81
+                    ->  Bitmap Index Scan on wallet_time_idx  (cost=0.00..158.12 rows=6170 width=0) (actual time=0.094..0.094 rows=6097 loops=1)
                           Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
                           Buffers: shared hit=27
 Planning:
   Buffers: shared hit=226
-Planning Time: 0.320 ms
-Execution Time: 0.839 ms
+Planning Time: 0.734 ms
+Execution Time: 0.756 ms

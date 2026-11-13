@@ -1,30 +1,30 @@
 === R22 run 1 ===
-Limit  (cost=0.42..2.04 rows=25 width=36) (actual time=0.010..0.013 rows=25 loops=1)
-  Buffers: shared hit=4
-  ->  Index Scan Backward using wallet_time_idx on wallet_transactions  (cost=0.42..4427.39 rows=68116 width=36) (actual time=0.010..0.011 rows=25 loops=1)
+Limit  (cost=0.42..2.04 rows=25 width=36) (actual time=0.014..0.016 rows=25 loops=1)
+  Buffers: shared hit=2 read=2
+  ->  Index Scan Backward using wallet_time_idx on wallet_transactions  (cost=0.42..4423.90 rows=68117 width=36) (actual time=0.013..0.015 rows=25 loops=1)
         Index Cond: (ROW(created_at, txn_id) < ROW('2025-12-25 00:48:00+05:30'::timestamp with time zone, 68344))
-        Buffers: shared hit=4
+        Buffers: shared hit=2 read=2
 Planning:
   Buffers: shared hit=175
-Planning Time: 0.263 ms
-Execution Time: 0.027 ms
+Planning Time: 0.540 ms
+Execution Time: 0.030 ms
 === R22 run 2 ===
-Limit  (cost=0.42..2.04 rows=25 width=36) (actual time=0.010..0.012 rows=25 loops=1)
+Limit  (cost=0.42..2.04 rows=25 width=36) (actual time=0.011..0.013 rows=25 loops=1)
   Buffers: shared hit=4
-  ->  Index Scan Backward using wallet_time_idx on wallet_transactions  (cost=0.42..4427.39 rows=68116 width=36) (actual time=0.009..0.011 rows=25 loops=1)
+  ->  Index Scan Backward using wallet_time_idx on wallet_transactions  (cost=0.42..4423.90 rows=68117 width=36) (actual time=0.010..0.012 rows=25 loops=1)
         Index Cond: (ROW(created_at, txn_id) < ROW('2025-12-25 00:48:00+05:30'::timestamp with time zone, 68344))
         Buffers: shared hit=4
 Planning:
   Buffers: shared hit=175
-Planning Time: 0.255 ms
+Planning Time: 0.600 ms
 Execution Time: 0.026 ms
 === R22 run 3 ===
-Limit  (cost=0.42..2.04 rows=25 width=36) (actual time=0.009..0.012 rows=25 loops=1)
+Limit  (cost=0.42..2.04 rows=25 width=36) (actual time=0.010..0.012 rows=25 loops=1)
   Buffers: shared hit=4
-  ->  Index Scan Backward using wallet_time_idx on wallet_transactions  (cost=0.42..4427.39 rows=68116 width=36) (actual time=0.009..0.011 rows=25 loops=1)
+  ->  Index Scan Backward using wallet_time_idx on wallet_transactions  (cost=0.42..4423.90 rows=68117 width=36) (actual time=0.009..0.011 rows=25 loops=1)
         Index Cond: (ROW(created_at, txn_id) < ROW('2025-12-25 00:48:00+05:30'::timestamp with time zone, 68344))
         Buffers: shared hit=4
 Planning:
   Buffers: shared hit=175
-Planning Time: 0.249 ms
-Execution Time: 0.026 ms
+Planning Time: 0.504 ms
+Execution Time: 0.025 ms

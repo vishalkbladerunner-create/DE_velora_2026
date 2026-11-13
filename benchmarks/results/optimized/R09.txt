@@ -1,57 +1,57 @@
 === R09 run 1 ===
-WindowAgg  (cost=16.03..16.11 rows=3 width=57) (actual time=0.114..0.124 rows=8 loops=1)
-  Buffers: shared hit=13
-  ->  Sort  (cost=16.03..16.04 rows=3 width=25) (actual time=0.090..0.091 rows=8 loops=1)
+WindowAgg  (cost=16.03..16.11 rows=3 width=57) (actual time=0.037..0.041 rows=8 loops=1)
+  Buffers: shared hit=10 read=3
+  ->  Sort  (cost=16.03..16.04 rows=3 width=25) (actual time=0.028..0.029 rows=8 loops=1)
         Sort Key: created_at, txn_id
         Sort Method: quicksort  Memory: 25kB
-        Buffers: shared hit=13
-        ->  Bitmap Heap Scan on wallet_transactions  (cost=4.44..16.00 rows=3 width=25) (actual time=0.037..0.062 rows=8 loops=1)
+        Buffers: shared hit=10 read=3
+        ->  Bitmap Heap Scan on wallet_transactions  (cost=4.44..16.00 rows=3 width=25) (actual time=0.015..0.021 rows=8 loops=1)
               Recheck Cond: (user_id = 1006)
               Filter: ((status)::text = 'SUCCESS'::text)
               Heap Blocks: exact=4
-              Buffers: shared hit=7
-              ->  Bitmap Index Scan on wallet_user_time_idx  (cost=0.00..4.44 rows=3 width=0) (actual time=0.019..0.020 rows=8 loops=1)
+              Buffers: shared hit=4 read=3
+              ->  Bitmap Index Scan on wallet_user_time_idx  (cost=0.00..4.44 rows=3 width=0) (actual time=0.011..0.011 rows=8 loops=1)
                     Index Cond: (user_id = 1006)
-                    Buffers: shared hit=3
+                    Buffers: shared read=3
 Planning:
   Buffers: shared hit=187
-Planning Time: 1.092 ms
-Execution Time: 0.200 ms
+Planning Time: 0.567 ms
+Execution Time: 0.060 ms
 === R09 run 2 ===
-WindowAgg  (cost=16.03..16.11 rows=3 width=57) (actual time=0.096..0.105 rows=8 loops=1)
+WindowAgg  (cost=16.03..16.11 rows=3 width=57) (actual time=0.032..0.035 rows=8 loops=1)
   Buffers: shared hit=13
-  ->  Sort  (cost=16.03..16.04 rows=3 width=25) (actual time=0.072..0.073 rows=8 loops=1)
+  ->  Sort  (cost=16.03..16.04 rows=3 width=25) (actual time=0.023..0.024 rows=8 loops=1)
         Sort Key: created_at, txn_id
         Sort Method: quicksort  Memory: 25kB
         Buffers: shared hit=13
-        ->  Bitmap Heap Scan on wallet_transactions  (cost=4.44..16.00 rows=3 width=25) (actual time=0.027..0.047 rows=8 loops=1)
+        ->  Bitmap Heap Scan on wallet_transactions  (cost=4.44..16.00 rows=3 width=25) (actual time=0.009..0.015 rows=8 loops=1)
               Recheck Cond: (user_id = 1006)
               Filter: ((status)::text = 'SUCCESS'::text)
               Heap Blocks: exact=4
               Buffers: shared hit=7
-              ->  Bitmap Index Scan on wallet_user_time_idx  (cost=0.00..4.44 rows=3 width=0) (actual time=0.016..0.016 rows=8 loops=1)
+              ->  Bitmap Index Scan on wallet_user_time_idx  (cost=0.00..4.44 rows=3 width=0) (actual time=0.005..0.005 rows=8 loops=1)
                     Index Cond: (user_id = 1006)
                     Buffers: shared hit=3
 Planning:
   Buffers: shared hit=187
-Planning Time: 1.038 ms
-Execution Time: 0.179 ms
+Planning Time: 0.477 ms
+Execution Time: 0.055 ms
 === R09 run 3 ===
-WindowAgg  (cost=16.03..16.11 rows=3 width=57) (actual time=0.107..0.117 rows=8 loops=1)
+WindowAgg  (cost=16.03..16.11 rows=3 width=57) (actual time=0.030..0.033 rows=8 loops=1)
   Buffers: shared hit=13
-  ->  Sort  (cost=16.03..16.04 rows=3 width=25) (actual time=0.083..0.084 rows=8 loops=1)
+  ->  Sort  (cost=16.03..16.04 rows=3 width=25) (actual time=0.022..0.022 rows=8 loops=1)
         Sort Key: created_at, txn_id
         Sort Method: quicksort  Memory: 25kB
         Buffers: shared hit=13
-        ->  Bitmap Heap Scan on wallet_transactions  (cost=4.44..16.00 rows=3 width=25) (actual time=0.031..0.056 rows=8 loops=1)
+        ->  Bitmap Heap Scan on wallet_transactions  (cost=4.44..16.00 rows=3 width=25) (actual time=0.009..0.015 rows=8 loops=1)
               Recheck Cond: (user_id = 1006)
               Filter: ((status)::text = 'SUCCESS'::text)
               Heap Blocks: exact=4
               Buffers: shared hit=7
-              ->  Bitmap Index Scan on wallet_user_time_idx  (cost=0.00..4.44 rows=3 width=0) (actual time=0.019..0.019 rows=8 loops=1)
+              ->  Bitmap Index Scan on wallet_user_time_idx  (cost=0.00..4.44 rows=3 width=0) (actual time=0.005..0.005 rows=8 loops=1)
                     Index Cond: (user_id = 1006)
                     Buffers: shared hit=3
 Planning:
   Buffers: shared hit=187
-Planning Time: 1.030 ms
-Execution Time: 0.195 ms
+Planning Time: 0.548 ms
+Execution Time: 0.059 ms

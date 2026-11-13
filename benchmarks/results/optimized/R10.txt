@@ -1,24 +1,24 @@
 === R10 run 1 ===
-Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.27 rows=7 width=21) (actual time=0.020..0.089 rows=100 loops=1)
+Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.30 rows=9 width=21) (actual time=0.006..0.024 rows=100 loops=1)
   Index Cond: (created_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '24:00:00'::interval))
-  Buffers: shared hit=13
+  Buffers: shared hit=12 read=1
 Planning:
-  Buffers: shared hit=191
-Planning Time: 1.338 ms
-Execution Time: 0.117 ms
+  Buffers: shared hit=188 read=3
+Planning Time: 0.649 ms
+Execution Time: 0.033 ms
 === R10 run 2 ===
-Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.27 rows=7 width=21) (actual time=0.015..0.084 rows=100 loops=1)
+Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.30 rows=9 width=21) (actual time=0.004..0.023 rows=100 loops=1)
   Index Cond: (created_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '24:00:00'::interval))
   Buffers: shared hit=13
 Planning:
   Buffers: shared hit=191
-Planning Time: 1.180 ms
-Execution Time: 0.115 ms
+Planning Time: 0.530 ms
+Execution Time: 0.032 ms
 === R10 run 3 ===
-Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.27 rows=7 width=21) (actual time=0.011..0.072 rows=100 loops=1)
+Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.30 rows=9 width=21) (actual time=0.005..0.023 rows=100 loops=1)
   Index Cond: (created_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '24:00:00'::interval))
   Buffers: shared hit=13
 Planning:
   Buffers: shared hit=191
-Planning Time: 1.220 ms
-Execution Time: 0.101 ms
+Planning Time: 0.574 ms
+Execution Time: 0.032 ms

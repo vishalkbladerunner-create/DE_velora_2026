@@ -1,33 +1,33 @@
 === W05 run 1 ===
-Update on wallet_transactions  (cost=0.14..8.30 rows=0 width=0) (actual time=1.606..1.606 rows=0 loops=1)
-  Buffers: shared hit=1416 dirtied=1 written=1
-  ->  Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.30 rows=7 width=44) (actual time=0.015..0.101 rows=100 loops=1)
+Update on wallet_transactions  (cost=0.14..8.35 rows=0 width=0) (actual time=0.555..0.555 rows=0 loops=1)
+  Buffers: shared hit=1379 read=40 dirtied=51
+  ->  Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.35 rows=9 width=44) (actual time=0.006..0.022 rows=100 loops=1)
         Index Cond: (created_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '24:00:00'::interval))
         Filter: (((txn_type)::text = 'WITHDRAWAL'::text) AND ((status)::text = 'PENDING'::text))
         Buffers: shared hit=13
 Planning:
   Buffers: shared hit=173
-Planning Time: 0.949 ms
-Execution Time: 1.655 ms
+Planning Time: 0.593 ms
+Execution Time: 0.619 ms
 === W05 run 2 ===
-Update on wallet_transactions  (cost=0.14..8.30 rows=0 width=0) (actual time=1.022..1.022 rows=0 loops=1)
-  Buffers: shared hit=1406 dirtied=1 written=1
-  ->  Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.30 rows=7 width=44) (actual time=0.008..0.063 rows=100 loops=1)
+Update on wallet_transactions  (cost=0.14..8.35 rows=0 width=0) (actual time=0.551..0.552 rows=0 loops=1)
+  Buffers: shared hit=1404 dirtied=2 written=1
+  ->  Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.35 rows=9 width=44) (actual time=0.009..0.032 rows=100 loops=1)
         Index Cond: (created_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '24:00:00'::interval))
         Filter: (((txn_type)::text = 'WITHDRAWAL'::text) AND ((status)::text = 'PENDING'::text))
         Buffers: shared hit=13
 Planning:
   Buffers: shared hit=173
-Planning Time: 0.268 ms
-Execution Time: 1.046 ms
+Planning Time: 0.543 ms
+Execution Time: 0.614 ms
 === W05 run 3 ===
-Update on wallet_transactions  (cost=0.14..8.30 rows=0 width=0) (actual time=1.798..1.798 rows=0 loops=1)
-  Buffers: shared hit=1419 dirtied=1 written=1
-  ->  Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.30 rows=7 width=44) (actual time=0.026..0.117 rows=100 loops=1)
+Update on wallet_transactions  (cost=0.14..8.35 rows=0 width=0) (actual time=0.536..0.536 rows=0 loops=1)
+  Buffers: shared hit=1417 dirtied=1 written=1
+  ->  Index Scan using wallet_pending_withdrawal_idx on wallet_transactions  (cost=0.14..8.35 rows=9 width=44) (actual time=0.009..0.032 rows=100 loops=1)
         Index Cond: (created_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '24:00:00'::interval))
         Filter: (((txn_type)::text = 'WITHDRAWAL'::text) AND ((status)::text = 'PENDING'::text))
         Buffers: shared hit=13
 Planning:
   Buffers: shared hit=173
-Planning Time: 0.877 ms
-Execution Time: 1.834 ms
+Planning Time: 0.516 ms
+Execution Time: 0.595 ms
