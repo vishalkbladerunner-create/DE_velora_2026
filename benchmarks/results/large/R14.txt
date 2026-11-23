@@ -1,0 +1,153 @@
+=== R14 run 1 ===
+Sort  (cost=5426.89..5426.90 rows=4 width=48) (actual time=13.531..13.541 rows=4 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1919
+  ->  GroupAggregate  (cost=5412.21..5426.85 rows=4 width=48) (actual time=13.459..13.536 rows=4 loops=1)
+        Group Key: c.contest_type
+        Buffers: shared hit=1916
+        ->  Sort  (cost=5412.21..5415.12 rows=1164 width=20) (actual time=13.412..13.442 rows=1116 loops=1)
+              Sort Key: c.contest_type
+              Sort Method: quicksort  Memory: 121kB
+              Buffers: shared hit=1913
+              ->  Hash Left Join  (cost=5288.62..5352.93 rows=1164 width=20) (actual time=13.036..13.266 rows=1116 loops=1)
+                    Hash Cond: (c.contest_id = e.contest_id)
+                    Buffers: shared hit=1910
+                    ->  Hash Join  (cost=7.92..69.17 rows=1164 width=16) (actual time=0.115..0.255 rows=1116 loops=1)
+                          Hash Cond: (c.match_id = m.match_id)
+                          Buffers: shared hit=32
+                          ->  Seq Scan on contests c  (cost=0.00..54.44 rows=2544 width=20) (actual time=0.003..0.079 rows=2544 loops=1)
+                                Buffers: shared hit=29
+                          ->  Hash  (cost=6.71..6.71 rows=97 width=4) (actual time=0.022..0.022 rows=93 loops=1)
+                                Buckets: 1024  Batches: 1  Memory Usage: 12kB
+                                Buffers: shared hit=3
+                                ->  Seq Scan on matches m  (cost=0.00..6.71 rows=97 width=4) (actual time=0.008..0.016 rows=93 loops=1)
+                                      Filter: ((starts_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (starts_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                                      Rows Removed by Filter: 119
+                                      Buffers: shared hit=3
+                    ->  Hash  (cost=5260.46..5260.46 rows=1619 width=12) (actual time=12.918..12.927 rows=2544 loops=1)
+                          Buckets: 4096 (originally 2048)  Batches: 1 (originally 1)  Memory Usage: 142kB
+                          Buffers: shared hit=1878
+                          ->  Subquery Scan on e  (cost=5228.09..5260.46 rows=1619 width=12) (actual time=12.592..12.797 rows=2544 loops=1)
+                                Buffers: shared hit=1878
+                                ->  Finalize HashAggregate  (cost=5228.09..5244.27 rows=1619 width=12) (actual time=12.591..12.705 rows=2544 loops=1)
+                                      Group Key: contest_entries.contest_id
+                                      Batches: 1  Memory Usage: 369kB
+                                      Buffers: shared hit=1878
+                                      ->  Gather  (cost=5041.90..5219.99 rows=1619 width=12) (actual time=12.049..12.268 rows=3706 loops=1)
+                                            Workers Planned: 1
+                                            Workers Launched: 1
+                                            Buffers: shared hit=1878
+                                            ->  Partial HashAggregate  (cost=4041.90..4058.09 rows=1619 width=12) (actual time=10.883..10.974 rows=1853 loops=2)
+                                                  Group Key: contest_entries.contest_id
+                                                  Batches: 1  Memory Usage: 369kB
+                                                  Buffers: shared hit=1878
+                                                  Worker 0:  Batches: 1  Memory Usage: 321kB
+                                                  ->  Parallel Seq Scan on contest_entries  (cost=0.00..3320.60 rows=144260 width=4) (actual time=0.002..3.524 rows=122621 loops=2)
+                                                        Buffers: shared hit=1878
+Planning:
+  Buffers: shared hit=251 read=2
+Planning Time: 1.054 ms
+Execution Time: 13.590 ms
+=== R14 run 2 ===
+Sort  (cost=5426.89..5426.90 rows=4 width=48) (actual time=13.639..13.649 rows=4 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1919
+  ->  GroupAggregate  (cost=5412.21..5426.85 rows=4 width=48) (actual time=13.564..13.644 rows=4 loops=1)
+        Group Key: c.contest_type
+        Buffers: shared hit=1916
+        ->  Sort  (cost=5412.21..5415.12 rows=1164 width=20) (actual time=13.517..13.550 rows=1116 loops=1)
+              Sort Key: c.contest_type
+              Sort Method: quicksort  Memory: 121kB
+              Buffers: shared hit=1913
+              ->  Hash Left Join  (cost=5288.62..5352.93 rows=1164 width=20) (actual time=13.148..13.380 rows=1116 loops=1)
+                    Hash Cond: (c.contest_id = e.contest_id)
+                    Buffers: shared hit=1910
+                    ->  Hash Join  (cost=7.92..69.17 rows=1164 width=16) (actual time=0.119..0.258 rows=1116 loops=1)
+                          Hash Cond: (c.match_id = m.match_id)
+                          Buffers: shared hit=32
+                          ->  Seq Scan on contests c  (cost=0.00..54.44 rows=2544 width=20) (actual time=0.003..0.080 rows=2544 loops=1)
+                                Buffers: shared hit=29
+                          ->  Hash  (cost=6.71..6.71 rows=97 width=4) (actual time=0.022..0.023 rows=93 loops=1)
+                                Buckets: 1024  Batches: 1  Memory Usage: 12kB
+                                Buffers: shared hit=3
+                                ->  Seq Scan on matches m  (cost=0.00..6.71 rows=97 width=4) (actual time=0.009..0.017 rows=93 loops=1)
+                                      Filter: ((starts_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (starts_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                                      Rows Removed by Filter: 119
+                                      Buffers: shared hit=3
+                    ->  Hash  (cost=5260.46..5260.46 rows=1619 width=12) (actual time=13.026..13.035 rows=2544 loops=1)
+                          Buckets: 4096 (originally 2048)  Batches: 1 (originally 1)  Memory Usage: 142kB
+                          Buffers: shared hit=1878
+                          ->  Subquery Scan on e  (cost=5228.09..5260.46 rows=1619 width=12) (actual time=12.694..12.899 rows=2544 loops=1)
+                                Buffers: shared hit=1878
+                                ->  Finalize HashAggregate  (cost=5228.09..5244.27 rows=1619 width=12) (actual time=12.694..12.806 rows=2544 loops=1)
+                                      Group Key: contest_entries.contest_id
+                                      Batches: 1  Memory Usage: 369kB
+                                      Buffers: shared hit=1878
+                                      ->  Gather  (cost=5041.90..5219.99 rows=1619 width=12) (actual time=12.176..12.389 rows=3699 loops=1)
+                                            Workers Planned: 1
+                                            Workers Launched: 1
+                                            Buffers: shared hit=1878
+                                            ->  Partial HashAggregate  (cost=4041.90..4058.09 rows=1619 width=12) (actual time=10.937..11.023 rows=1850 loops=2)
+                                                  Group Key: contest_entries.contest_id
+                                                  Batches: 1  Memory Usage: 369kB
+                                                  Buffers: shared hit=1878
+                                                  Worker 0:  Batches: 1  Memory Usage: 321kB
+                                                  ->  Parallel Seq Scan on contest_entries  (cost=0.00..3320.60 rows=144260 width=4) (actual time=0.002..3.555 rows=122621 loops=2)
+                                                        Buffers: shared hit=1878
+Planning:
+  Buffers: shared hit=253
+Planning Time: 1.006 ms
+Execution Time: 13.698 ms
+=== R14 run 3 ===
+Sort  (cost=5426.89..5426.90 rows=4 width=48) (actual time=13.569..13.580 rows=4 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1919
+  ->  GroupAggregate  (cost=5412.21..5426.85 rows=4 width=48) (actual time=13.497..13.574 rows=4 loops=1)
+        Group Key: c.contest_type
+        Buffers: shared hit=1916
+        ->  Sort  (cost=5412.21..5415.12 rows=1164 width=20) (actual time=13.449..13.480 rows=1116 loops=1)
+              Sort Key: c.contest_type
+              Sort Method: quicksort  Memory: 121kB
+              Buffers: shared hit=1913
+              ->  Hash Left Join  (cost=5288.62..5352.93 rows=1164 width=20) (actual time=13.066..13.307 rows=1116 loops=1)
+                    Hash Cond: (c.contest_id = e.contest_id)
+                    Buffers: shared hit=1910
+                    ->  Hash Join  (cost=7.92..69.17 rows=1164 width=16) (actual time=0.106..0.247 rows=1116 loops=1)
+                          Hash Cond: (c.match_id = m.match_id)
+                          Buffers: shared hit=32
+                          ->  Seq Scan on contests c  (cost=0.00..54.44 rows=2544 width=20) (actual time=0.003..0.075 rows=2544 loops=1)
+                                Buffers: shared hit=29
+                          ->  Hash  (cost=6.71..6.71 rows=97 width=4) (actual time=0.020..0.020 rows=93 loops=1)
+                                Buckets: 1024  Batches: 1  Memory Usage: 12kB
+                                Buffers: shared hit=3
+                                ->  Seq Scan on matches m  (cost=0.00..6.71 rows=97 width=4) (actual time=0.007..0.015 rows=93 loops=1)
+                                      Filter: ((starts_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (starts_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'COMPLETED'::text))
+                                      Rows Removed by Filter: 119
+                                      Buffers: shared hit=3
+                    ->  Hash  (cost=5260.46..5260.46 rows=1619 width=12) (actual time=12.956..12.966 rows=2544 loops=1)
+                          Buckets: 4096 (originally 2048)  Batches: 1 (originally 1)  Memory Usage: 142kB
+                          Buffers: shared hit=1878
+                          ->  Subquery Scan on e  (cost=5228.09..5260.46 rows=1619 width=12) (actual time=12.638..12.845 rows=2544 loops=1)
+                                Buffers: shared hit=1878
+                                ->  Finalize HashAggregate  (cost=5228.09..5244.27 rows=1619 width=12) (actual time=12.638..12.752 rows=2544 loops=1)
+                                      Group Key: contest_entries.contest_id
+                                      Batches: 1  Memory Usage: 369kB
+                                      Buffers: shared hit=1878
+                                      ->  Gather  (cost=5041.90..5219.99 rows=1619 width=12) (actual time=12.064..12.290 rows=3701 loops=1)
+                                            Workers Planned: 1
+                                            Workers Launched: 1
+                                            Buffers: shared hit=1878
+                                            ->  Partial HashAggregate  (cost=4041.90..4058.09 rows=1619 width=12) (actual time=10.895..10.987 rows=1850 loops=2)
+                                                  Group Key: contest_entries.contest_id
+                                                  Batches: 1  Memory Usage: 369kB
+                                                  Buffers: shared hit=1878
+                                                  Worker 0:  Batches: 1  Memory Usage: 321kB
+                                                  ->  Parallel Seq Scan on contest_entries  (cost=0.00..3320.60 rows=144260 width=4) (actual time=0.002..3.582 rows=122621 loops=2)
+                                                        Buffers: shared hit=1878
+Planning:
+  Buffers: shared hit=253
+Planning Time: 0.876 ms
+Execution Time: 13.629 ms

@@ -44,6 +44,29 @@
 
 ---
 
+## Phase 5 snapshot (CP4)
+
+The Phase 5 large dataset was loaded into a separate database (`dream11_large`) on 21 November 2026: **12,428,192 rows**, **1.25 GB** total and **722 MB** of indexes. The optimized workload was run three times after a warm-up pass; the measured average is in `benchmarks/results/large/summary.csv`, the cold pass in `summary-cold.csv`.
+
+**27 of 30 targets are met.** `W04` was fixed by adding the match predicate (105.7 ms, under the 250 ms target). `R02` (17.97 ms average / 11.31 ms median) and `R05` (13.39 ms average / 5.87 ms median) are explained in the report; the fixes are a per-match selection summary and a materialized leaderboard. `R08` is 0.4% over the 5 ms line (5.021 ms average, 4.939 ms median) and is within run noise.
+
+Reproduce on the large data:
+
+```bash
+createdb dream11_large
+psql -d dream11_large -f sql/01_schema.sql
+psql -d dream11_large -f sql/07_load_large.sql
+psql -d dream11_large -f sql/05_indexes.sql
+psql -d dream11_large -f sql/09_scale_fixes.sql
+psql -d dream11_large -c 'ANALYZE'
+./benchmarks/run_benchmark.sh dream11_large large 3 sql/06_optimized_queries.sql
+psql -d dream11_large -f sql/08_partitioning.sql
+```
+
+`large_data/` and `large_data.zip` are gitignored. The full analysis, storage table, partitioning DDL and the 100× design are in [`docs/05_scalability_report.md`](docs/05_scalability_report.md).
+
+---
+
 ## Phase 1: Problem statements
 
 Dream11 is a fantasy cricket platform. For every real **match** (IPL and international T20s), users build **fantasy teams** of exactly 11 **players** from the two real teams within 100 credits, picking a **captain** (2× points) and **vice-captain** (1.5×). After the match, each player's real performance is converted into **fantasy points**. Users join **contests** (mega contests, small contests, head-to-heads, private leagues with invite codes) by paying an entry fee from their **wallet**; winners get prize money. The wallet records deposits, entry fees, winnings, refunds (for abandoned matches), bonuses and withdrawals. You have joined the Dream11 data team.

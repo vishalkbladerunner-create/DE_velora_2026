@@ -84,7 +84,7 @@ CREATE TABLE player_match_stats (
 
 CREATE TABLE users (
     user_id    INTEGER PRIMARY KEY,
-    username   VARCHAR(25) NOT NULL UNIQUE,
+    username   VARCHAR(40) NOT NULL UNIQUE,
     phone      VARCHAR(10) NOT NULL UNIQUE,
     email      VARCHAR(80) UNIQUE,
     state_code CHAR(2)     NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE users (
     created_at TIMESTAMPTZ NOT NULL,
 
     CONSTRAINT users_username_format
-        CHECK (username ~ '^[A-Za-z][A-Za-z0-9_]{2,24}$'),
+        CHECK (username ~ '^[A-Za-z][A-Za-z0-9_]{2,39}$'),
     CONSTRAINT users_phone_format
         CHECK (phone ~ '^[6-9][0-9]{9}$'),
     CONSTRAINT users_email_format
