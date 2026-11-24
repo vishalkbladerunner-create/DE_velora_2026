@@ -83,7 +83,7 @@ Table-level CHECK: `fours * 4 + sixes * 6 <= runs` (boundary runs cannot exceed 
 | Column | Type | Constraints | Why |
 | --- | --- | --- | --- |
 | `user_id` | `INTEGER` | PK | Stable id from the export. |
-| `username` | `VARCHAR(25)` | NOT NULL, UNIQUE, CHECK `^[A-Za-z][A-Za-z0-9_]{2,24}$` | Login handle; 3–25 characters. |
+| `username` | `VARCHAR(40)` | NOT NULL, UNIQUE, CHECK `^[A-Za-z][A-Za-z0-9_]{2,39}$` | Login handle; 3–40 characters. |
 | `phone` | `VARCHAR(10)` | NOT NULL, UNIQUE, CHECK `^[6-9][0-9]{9}$` | Indian mobile number; R23 logs in with it. |
 | `email` | `VARCHAR(80)` | UNIQUE, nullable, CHECK contains `@` and a dot | Optional contact; 19,935 users have none. |
 | `state_code` | `CHAR(2)` | NOT NULL, CHECK `^[A-Z]{2}$` | Compliance state; R11 filters four states. |
@@ -375,7 +375,7 @@ The last four failures are **data problems**, not schema problems. The schema mu
 - **2,120 contests have NULL invite_code.** Exactly the 2,120 non-PRIVATE contests; the 424 private ones all have a code.
 - **63,000 wallet rows have NULL reference_entry_id.** Exactly the DEPOSIT, WITHDRAWAL and BONUS rows.
 - **330 distinct player names for 450 players.** `full_name` cannot be unique.
-- **1,766 usernames are 21–25 characters.** The format CHECK allows 3–25 characters; a tighter limit would reject real rows.
+- **1,766 usernames are 21–25 characters in the seed data.** The large dataset reaches 26 characters, so the CP4 load widened the column and the check to 40; the seed rows still satisfy it.
 - **No oversubscribed contests, no entries after a match start, no home = away.** Those constraints are safe and enforced.
 
 ## 12. Load and verification
